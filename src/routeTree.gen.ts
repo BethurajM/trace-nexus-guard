@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCasesIndexRouteImport } from './routes/_app.cases.index'
+import { Route as AppCasesCaseIdRouteImport } from './routes/_app.cases.$caseId'
+import { Route as AppEvidenceIndexRouteImport } from './routes/_app.evidence.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,30 +35,53 @@ const AppCasesIndexRoute = AppCasesIndexRouteImport.update({
   path: '/cases/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCasesCaseIdRoute = AppCasesCaseIdRouteImport.update({
+  id: '/cases/$caseId',
+  path: '/cases/$caseId',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEvidenceIndexRoute = AppEvidenceIndexRouteImport.update({
+  id: '/evidence/',
+  path: '/evidence/',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
+  '/cases/$caseId': typeof AppCasesCaseIdRoute
   '/cases/': typeof AppCasesIndexRoute
+  '/evidence/': typeof AppEvidenceIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
+  '/cases/$caseId': typeof AppCasesCaseIdRoute
   '/cases': typeof AppCasesIndexRoute
+  '/evidence': typeof AppEvidenceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/cases/$caseId': typeof AppCasesCaseIdRoute
   '/_app/cases/': typeof AppCasesIndexRoute
+  '/_app/evidence/': typeof AppEvidenceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/cases/'
+  fullPaths: '/' | '/dashboard' | '/cases/$caseId' | '/cases/' | '/evidence/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/cases'
-  id: '__root__' | '/' | '/_app' | '/_app/dashboard' | '/_app/cases/'
+  to: '/' | '/dashboard' | '/cases/$caseId' | '/cases' | '/evidence'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/dashboard'
+    | '/_app/cases/$caseId'
+    | '/_app/cases/'
+    | '/_app/evidence/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,17 +119,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCasesIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/cases/$caseId': {
+      id: '/_app/cases/$caseId'
+      path: '/cases/$caseId'
+      fullPath: '/cases/$caseId'
+      preLoaderRoute: typeof AppCasesCaseIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/evidence/': {
+      id: '/_app/evidence/'
+      path: '/evidence'
+      fullPath: '/evidence/'
+      preLoaderRoute: typeof AppEvidenceIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
+  AppCasesCaseIdRoute: typeof AppCasesCaseIdRoute
   AppCasesIndexRoute: typeof AppCasesIndexRoute
+  AppEvidenceIndexRoute: typeof AppEvidenceIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
+  AppCasesCaseIdRoute: AppCasesCaseIdRoute,
   AppCasesIndexRoute: AppCasesIndexRoute,
+  AppEvidenceIndexRoute: AppEvidenceIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
