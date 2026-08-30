@@ -15,6 +15,8 @@ import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCasesIndexRouteImport } from './routes/_app.cases.index'
 import { Route as AppCasesCaseIdRouteImport } from './routes/_app.cases.$caseId'
 import { Route as AppEvidenceIndexRouteImport } from './routes/_app.evidence.index'
+import { Route as AppEvidenceEvidenceIdRouteImport } from './routes/_app.evidence.$evidenceId'
+import { Route as AppEvidenceUploadRouteImport } from './routes/_app.evidence.upload'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -45,11 +47,23 @@ const AppEvidenceIndexRoute = AppEvidenceIndexRouteImport.update({
   path: '/evidence/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppEvidenceEvidenceIdRoute = AppEvidenceEvidenceIdRouteImport.update({
+  id: '/evidence/$evidenceId',
+  path: '/evidence/$evidenceId',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEvidenceUploadRoute = AppEvidenceUploadRouteImport.update({
+  id: '/evidence/upload',
+  path: '/evidence/upload',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
+  '/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
+  '/evidence/upload': typeof AppEvidenceUploadRoute
   '/cases/': typeof AppCasesIndexRoute
   '/evidence/': typeof AppEvidenceIndexRoute
 }
@@ -57,6 +71,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
+  '/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
+  '/evidence/upload': typeof AppEvidenceUploadRoute
   '/cases': typeof AppCasesIndexRoute
   '/evidence': typeof AppEvidenceIndexRoute
 }
@@ -66,20 +82,38 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/cases/$caseId': typeof AppCasesCaseIdRoute
+  '/_app/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
+  '/_app/evidence/upload': typeof AppEvidenceUploadRoute
   '/_app/cases/': typeof AppCasesIndexRoute
   '/_app/evidence/': typeof AppEvidenceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/cases/$caseId' | '/cases/' | '/evidence/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/cases/$caseId'
+    | '/evidence/$evidenceId'
+    | '/evidence/upload'
+    | '/cases/'
+    | '/evidence/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/cases/$caseId' | '/cases' | '/evidence'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/cases/$caseId'
+    | '/evidence/$evidenceId'
+    | '/evidence/upload'
+    | '/cases'
+    | '/evidence'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/_app/dashboard'
     | '/_app/cases/$caseId'
+    | '/_app/evidence/$evidenceId'
+    | '/_app/evidence/upload'
     | '/_app/cases/'
     | '/_app/evidence/'
   fileRoutesById: FileRoutesById
@@ -133,12 +167,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppEvidenceIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/evidence/$evidenceId': {
+      id: '/_app/evidence/$evidenceId'
+      path: '/evidence/$evidenceId'
+      fullPath: '/evidence/$evidenceId'
+      preLoaderRoute: typeof AppEvidenceEvidenceIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/evidence/upload': {
+      id: '/_app/evidence/upload'
+      path: '/evidence/upload'
+      fullPath: '/evidence/upload'
+      preLoaderRoute: typeof AppEvidenceUploadRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppCasesCaseIdRoute: typeof AppCasesCaseIdRoute
+  AppEvidenceEvidenceIdRoute: typeof AppEvidenceEvidenceIdRoute
+  AppEvidenceUploadRoute: typeof AppEvidenceUploadRoute
   AppCasesIndexRoute: typeof AppCasesIndexRoute
   AppEvidenceIndexRoute: typeof AppEvidenceIndexRoute
 }
@@ -146,6 +196,8 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppCasesCaseIdRoute: AppCasesCaseIdRoute,
+  AppEvidenceEvidenceIdRoute: AppEvidenceEvidenceIdRoute,
+  AppEvidenceUploadRoute: AppEvidenceUploadRoute,
   AppCasesIndexRoute: AppCasesIndexRoute,
   AppEvidenceIndexRoute: AppEvidenceIndexRoute,
 }
