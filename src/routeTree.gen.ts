@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppAiAnalysisRouteImport } from './routes/_app.ai-analysis'
+import { Route as AppContradictionsRouteImport } from './routes/_app.contradictions'
 import { Route as AppCorrelationRouteImport } from './routes/_app.correlation'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCasesIndexRouteImport } from './routes/_app.cases.index'
@@ -32,6 +33,11 @@ const AppRoute = AppRouteImport.update({
 const AppAiAnalysisRoute = AppAiAnalysisRouteImport.update({
   id: '/ai-analysis',
   path: '/ai-analysis',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppContradictionsRoute = AppContradictionsRouteImport.update({
+  id: '/contradictions',
+  path: '/contradictions',
   getParentRoute: () => AppRoute,
 } as any)
 const AppCorrelationRoute = AppCorrelationRouteImport.update({
@@ -73,6 +79,7 @@ const AppEvidenceUploadRoute = AppEvidenceUploadRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AppAiAnalysisRoute
+  '/contradictions': typeof AppContradictionsRoute
   '/correlation': typeof AppCorrelationRoute
   '/dashboard': typeof AppDashboardRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
@@ -84,6 +91,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AppAiAnalysisRoute
+  '/contradictions': typeof AppContradictionsRoute
   '/correlation': typeof AppCorrelationRoute
   '/dashboard': typeof AppDashboardRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/ai-analysis': typeof AppAiAnalysisRoute
+  '/_app/contradictions': typeof AppContradictionsRoute
   '/_app/correlation': typeof AppCorrelationRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/cases/$caseId': typeof AppCasesCaseIdRoute
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/ai-analysis'
+    | '/contradictions'
     | '/correlation'
     | '/dashboard'
     | '/cases/$caseId'
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/ai-analysis'
+    | '/contradictions'
     | '/correlation'
     | '/dashboard'
     | '/cases/$caseId'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/_app/ai-analysis'
+    | '/_app/contradictions'
     | '/_app/correlation'
     | '/_app/dashboard'
     | '/_app/cases/$caseId'
@@ -168,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/ai-analysis'
       fullPath: '/ai-analysis'
       preLoaderRoute: typeof AppAiAnalysisRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/contradictions': {
+      id: '/_app/contradictions'
+      path: '/contradictions'
+      fullPath: '/contradictions'
+      preLoaderRoute: typeof AppContradictionsRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/correlation': {
@@ -224,6 +243,7 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppAiAnalysisRoute: typeof AppAiAnalysisRoute
+  AppContradictionsRoute: typeof AppContradictionsRoute
   AppCorrelationRoute: typeof AppCorrelationRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppCasesCaseIdRoute: typeof AppCasesCaseIdRoute
@@ -235,6 +255,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppAiAnalysisRoute: AppAiAnalysisRoute,
+  AppContradictionsRoute: AppContradictionsRoute,
   AppCorrelationRoute: AppCorrelationRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppCasesCaseIdRoute: AppCasesCaseIdRoute,
