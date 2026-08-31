@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppAiAnalysisRouteImport } from './routes/_app.ai-analysis'
+import { Route as AppBlockchainRouteImport } from './routes/_app.blockchain'
 import { Route as AppChainOfCustodyRouteImport } from './routes/_app.chain-of-custody'
 import { Route as AppContradictionsRouteImport } from './routes/_app.contradictions'
 import { Route as AppCorrelationRouteImport } from './routes/_app.correlation'
@@ -35,6 +36,11 @@ const AppRoute = AppRouteImport.update({
 const AppAiAnalysisRoute = AppAiAnalysisRouteImport.update({
   id: '/ai-analysis',
   path: '/ai-analysis',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBlockchainRoute = AppBlockchainRouteImport.update({
+  id: '/blockchain',
+  path: '/blockchain',
   getParentRoute: () => AppRoute,
 } as any)
 const AppChainOfCustodyRoute = AppChainOfCustodyRouteImport.update({
@@ -91,6 +97,7 @@ const AppEvidenceUploadRoute = AppEvidenceUploadRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AppAiAnalysisRoute
+  '/blockchain': typeof AppBlockchainRoute
   '/chain-of-custody': typeof AppChainOfCustodyRoute
   '/contradictions': typeof AppContradictionsRoute
   '/correlation': typeof AppCorrelationRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai-analysis': typeof AppAiAnalysisRoute
+  '/blockchain': typeof AppBlockchainRoute
   '/chain-of-custody': typeof AppChainOfCustodyRoute
   '/contradictions': typeof AppContradictionsRoute
   '/correlation': typeof AppCorrelationRoute
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/ai-analysis': typeof AppAiAnalysisRoute
+  '/_app/blockchain': typeof AppBlockchainRoute
   '/_app/chain-of-custody': typeof AppChainOfCustodyRoute
   '/_app/contradictions': typeof AppContradictionsRoute
   '/_app/correlation': typeof AppCorrelationRoute
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/ai-analysis'
+    | '/blockchain'
     | '/chain-of-custody'
     | '/contradictions'
     | '/correlation'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/ai-analysis'
+    | '/blockchain'
     | '/chain-of-custody'
     | '/contradictions'
     | '/correlation'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/_app/ai-analysis'
+    | '/_app/blockchain'
     | '/_app/chain-of-custody'
     | '/_app/contradictions'
     | '/_app/correlation'
@@ -204,6 +216,13 @@ declare module '@tanstack/react-router' {
       path: '/ai-analysis'
       fullPath: '/ai-analysis'
       preLoaderRoute: typeof AppAiAnalysisRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/blockchain': {
+      id: '/_app/blockchain'
+      path: '/blockchain'
+      fullPath: '/blockchain'
+      preLoaderRoute: typeof AppBlockchainRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/chain-of-custody': {
@@ -281,6 +300,7 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppAiAnalysisRoute: typeof AppAiAnalysisRoute
+  AppBlockchainRoute: typeof AppBlockchainRoute
   AppChainOfCustodyRoute: typeof AppChainOfCustodyRoute
   AppContradictionsRoute: typeof AppContradictionsRoute
   AppCorrelationRoute: typeof AppCorrelationRoute
@@ -295,6 +315,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppAiAnalysisRoute: AppAiAnalysisRoute,
+  AppBlockchainRoute: AppBlockchainRoute,
   AppChainOfCustodyRoute: AppChainOfCustodyRoute,
   AppContradictionsRoute: AppContradictionsRoute,
   AppCorrelationRoute: AppCorrelationRoute,
