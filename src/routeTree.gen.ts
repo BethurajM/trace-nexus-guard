@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppAiAnalysisRouteImport } from './routes/_app.ai-analysis'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCasesIndexRouteImport } from './routes/_app.cases.index'
 import { Route as AppCasesCaseIdRouteImport } from './routes/_app.cases.$caseId'
@@ -26,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppAiAnalysisRoute = AppAiAnalysisRouteImport.update({
+  id: '/ai-analysis',
+  path: '/ai-analysis',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
@@ -60,6 +66,7 @@ const AppEvidenceUploadRoute = AppEvidenceUploadRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-analysis': typeof AppAiAnalysisRoute
   '/dashboard': typeof AppDashboardRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
   '/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
@@ -69,6 +76,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-analysis': typeof AppAiAnalysisRoute
   '/dashboard': typeof AppDashboardRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
   '/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/ai-analysis': typeof AppAiAnalysisRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/cases/$caseId': typeof AppCasesCaseIdRoute
   '/_app/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ai-analysis'
     | '/dashboard'
     | '/cases/$caseId'
     | '/evidence/$evidenceId'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ai-analysis'
     | '/dashboard'
     | '/cases/$caseId'
     | '/evidence/$evidenceId'
@@ -110,6 +121,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/ai-analysis'
     | '/_app/dashboard'
     | '/_app/cases/$caseId'
     | '/_app/evidence/$evidenceId'
@@ -138,6 +150,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/ai-analysis': {
+      id: '/_app/ai-analysis'
+      path: '/ai-analysis'
+      fullPath: '/ai-analysis'
+      preLoaderRoute: typeof AppAiAnalysisRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/dashboard': {
       id: '/_app/dashboard'
@@ -185,6 +204,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAiAnalysisRoute: typeof AppAiAnalysisRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppCasesCaseIdRoute: typeof AppCasesCaseIdRoute
   AppEvidenceEvidenceIdRoute: typeof AppEvidenceEvidenceIdRoute
@@ -194,6 +214,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAiAnalysisRoute: AppAiAnalysisRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppCasesCaseIdRoute: AppCasesCaseIdRoute,
   AppEvidenceEvidenceIdRoute: AppEvidenceEvidenceIdRoute,
