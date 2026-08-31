@@ -11,7 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppAiAnalysisRouteImport } from './routes/_app.ai-analysis'
+import { Route as AppBlockchainRouteImport } from './routes/_app.blockchain'
+import { Route as AppChainOfCustodyRouteImport } from './routes/_app.chain-of-custody'
+import { Route as AppContradictionsRouteImport } from './routes/_app.contradictions'
+import { Route as AppCorrelationRouteImport } from './routes/_app.correlation'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppExternalRecordsRouteImport } from './routes/_app.external-records'
+import { Route as AppReportsRouteImport } from './routes/_app.reports'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppVerificationRouteImport } from './routes/_app.verification'
 import { Route as AppCasesIndexRouteImport } from './routes/_app.cases.index'
 import { Route as AppCasesCaseIdRouteImport } from './routes/_app.cases.$caseId'
 import { Route as AppEvidenceIndexRouteImport } from './routes/_app.evidence.index'
@@ -27,9 +36,54 @@ const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppAiAnalysisRoute = AppAiAnalysisRouteImport.update({
+  id: '/ai-analysis',
+  path: '/ai-analysis',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBlockchainRoute = AppBlockchainRouteImport.update({
+  id: '/blockchain',
+  path: '/blockchain',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppChainOfCustodyRoute = AppChainOfCustodyRouteImport.update({
+  id: '/chain-of-custody',
+  path: '/chain-of-custody',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppContradictionsRoute = AppContradictionsRouteImport.update({
+  id: '/contradictions',
+  path: '/contradictions',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCorrelationRoute = AppCorrelationRouteImport.update({
+  id: '/correlation',
+  path: '/correlation',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExternalRecordsRoute = AppExternalRecordsRouteImport.update({
+  id: '/external-records',
+  path: '/external-records',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportsRoute = AppReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVerificationRoute = AppVerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
   getParentRoute: () => AppRoute,
 } as any)
 const AppCasesIndexRoute = AppCasesIndexRouteImport.update({
@@ -60,7 +114,16 @@ const AppEvidenceUploadRoute = AppEvidenceUploadRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-analysis': typeof AppAiAnalysisRoute
+  '/blockchain': typeof AppBlockchainRoute
+  '/chain-of-custody': typeof AppChainOfCustodyRoute
+  '/contradictions': typeof AppContradictionsRoute
+  '/correlation': typeof AppCorrelationRoute
   '/dashboard': typeof AppDashboardRoute
+  '/external-records': typeof AppExternalRecordsRoute
+  '/reports': typeof AppReportsRoute
+  '/settings': typeof AppSettingsRoute
+  '/verification': typeof AppVerificationRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
   '/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
   '/evidence/upload': typeof AppEvidenceUploadRoute
@@ -69,7 +132,16 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-analysis': typeof AppAiAnalysisRoute
+  '/blockchain': typeof AppBlockchainRoute
+  '/chain-of-custody': typeof AppChainOfCustodyRoute
+  '/contradictions': typeof AppContradictionsRoute
+  '/correlation': typeof AppCorrelationRoute
   '/dashboard': typeof AppDashboardRoute
+  '/external-records': typeof AppExternalRecordsRoute
+  '/reports': typeof AppReportsRoute
+  '/settings': typeof AppSettingsRoute
+  '/verification': typeof AppVerificationRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
   '/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
   '/evidence/upload': typeof AppEvidenceUploadRoute
@@ -80,7 +152,16 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/ai-analysis': typeof AppAiAnalysisRoute
+  '/_app/blockchain': typeof AppBlockchainRoute
+  '/_app/chain-of-custody': typeof AppChainOfCustodyRoute
+  '/_app/contradictions': typeof AppContradictionsRoute
+  '/_app/correlation': typeof AppCorrelationRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/external-records': typeof AppExternalRecordsRoute
+  '/_app/reports': typeof AppReportsRoute
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/verification': typeof AppVerificationRoute
   '/_app/cases/$caseId': typeof AppCasesCaseIdRoute
   '/_app/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
   '/_app/evidence/upload': typeof AppEvidenceUploadRoute
@@ -91,7 +172,16 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ai-analysis'
+    | '/blockchain'
+    | '/chain-of-custody'
+    | '/contradictions'
+    | '/correlation'
     | '/dashboard'
+    | '/external-records'
+    | '/reports'
+    | '/settings'
+    | '/verification'
     | '/cases/$caseId'
     | '/evidence/$evidenceId'
     | '/evidence/upload'
@@ -100,7 +190,16 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ai-analysis'
+    | '/blockchain'
+    | '/chain-of-custody'
+    | '/contradictions'
+    | '/correlation'
     | '/dashboard'
+    | '/external-records'
+    | '/reports'
+    | '/settings'
+    | '/verification'
     | '/cases/$caseId'
     | '/evidence/$evidenceId'
     | '/evidence/upload'
@@ -110,7 +209,16 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/ai-analysis'
+    | '/_app/blockchain'
+    | '/_app/chain-of-custody'
+    | '/_app/contradictions'
+    | '/_app/correlation'
     | '/_app/dashboard'
+    | '/_app/external-records'
+    | '/_app/reports'
+    | '/_app/settings'
+    | '/_app/verification'
     | '/_app/cases/$caseId'
     | '/_app/evidence/$evidenceId'
     | '/_app/evidence/upload'
@@ -139,11 +247,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/ai-analysis': {
+      id: '/_app/ai-analysis'
+      path: '/ai-analysis'
+      fullPath: '/ai-analysis'
+      preLoaderRoute: typeof AppAiAnalysisRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/blockchain': {
+      id: '/_app/blockchain'
+      path: '/blockchain'
+      fullPath: '/blockchain'
+      preLoaderRoute: typeof AppBlockchainRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/chain-of-custody': {
+      id: '/_app/chain-of-custody'
+      path: '/chain-of-custody'
+      fullPath: '/chain-of-custody'
+      preLoaderRoute: typeof AppChainOfCustodyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/contradictions': {
+      id: '/_app/contradictions'
+      path: '/contradictions'
+      fullPath: '/contradictions'
+      preLoaderRoute: typeof AppContradictionsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/correlation': {
+      id: '/_app/correlation'
+      path: '/correlation'
+      fullPath: '/correlation'
+      preLoaderRoute: typeof AppCorrelationRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/external-records': {
+      id: '/_app/external-records'
+      path: '/external-records'
+      fullPath: '/external-records'
+      preLoaderRoute: typeof AppExternalRecordsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reports': {
+      id: '/_app/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AppReportsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/verification': {
+      id: '/_app/verification'
+      path: '/verification'
+      fullPath: '/verification'
+      preLoaderRoute: typeof AppVerificationRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/cases/': {
@@ -185,7 +356,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAiAnalysisRoute: typeof AppAiAnalysisRoute
+  AppBlockchainRoute: typeof AppBlockchainRoute
+  AppChainOfCustodyRoute: typeof AppChainOfCustodyRoute
+  AppContradictionsRoute: typeof AppContradictionsRoute
+  AppCorrelationRoute: typeof AppCorrelationRoute
   AppDashboardRoute: typeof AppDashboardRoute
+  AppExternalRecordsRoute: typeof AppExternalRecordsRoute
+  AppReportsRoute: typeof AppReportsRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppVerificationRoute: typeof AppVerificationRoute
   AppCasesCaseIdRoute: typeof AppCasesCaseIdRoute
   AppEvidenceEvidenceIdRoute: typeof AppEvidenceEvidenceIdRoute
   AppEvidenceUploadRoute: typeof AppEvidenceUploadRoute
@@ -194,7 +374,16 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAiAnalysisRoute: AppAiAnalysisRoute,
+  AppBlockchainRoute: AppBlockchainRoute,
+  AppChainOfCustodyRoute: AppChainOfCustodyRoute,
+  AppContradictionsRoute: AppContradictionsRoute,
+  AppCorrelationRoute: AppCorrelationRoute,
   AppDashboardRoute: AppDashboardRoute,
+  AppExternalRecordsRoute: AppExternalRecordsRoute,
+  AppReportsRoute: AppReportsRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppVerificationRoute: AppVerificationRoute,
   AppCasesCaseIdRoute: AppCasesCaseIdRoute,
   AppEvidenceEvidenceIdRoute: AppEvidenceEvidenceIdRoute,
   AppEvidenceUploadRoute: AppEvidenceUploadRoute,
