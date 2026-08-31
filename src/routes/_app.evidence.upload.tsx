@@ -119,7 +119,7 @@ function UploadPage() {
           <Panel title="Collection Metadata">
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Case ID">
-                <Select defaultValue={cases[0].id}>
+                <Select defaultValue={cases[0]?.id ?? ""}>
                   <SelectTrigger className="bg-surface/60">
                     <SelectValue />
                   </SelectTrigger>
@@ -133,7 +133,7 @@ function UploadPage() {
                 </Select>
               </Field>
               <Field label="Evidence Type">
-                <Select defaultValue={evidenceTypes[0]}>
+                <Select defaultValue={evidenceTypes[0] ?? ""}>
                   <SelectTrigger className="bg-surface/60">
                     <SelectValue />
                   </SelectTrigger>
@@ -147,7 +147,7 @@ function UploadPage() {
                 </Select>
               </Field>
               <Field label="Evidence Source">
-                <Select defaultValue={evidenceSources[0]}>
+                <Select defaultValue={evidenceSources[0] ?? ""}>
                   <SelectTrigger className="bg-surface/60">
                     <SelectValue />
                   </SelectTrigger>

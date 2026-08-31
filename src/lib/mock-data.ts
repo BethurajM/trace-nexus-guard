@@ -200,13 +200,13 @@ const evidenceSeed: Array<Partial<EvidenceItem> & { id: string; fileName: string
 ];
 
 export const evidence: EvidenceItem[] = evidenceSeed.map((e, i) => {
-  const original = HASHES[i % HASHES.length];
+  const original = HASHES[i % HASHES.length]!;
   const mismatch = e.id === "E015";
   const pending = e.id === "E030" || e.id === "E022";
   return {
     hashStatus: mismatch ? "Integrity Mismatch" : pending ? "Requires Verification" : "Integrity Verified",
     originalHash: original,
-    currentHash: mismatch ? HASHES[(i + 3) % HASHES.length] : original,
+    currentHash: mismatch ? HASHES[(i + 3) % HASHES.length]! : original,
     uploadedBy: i % 3 === 0 ? "Investigator A" : "Analyst B",
     date: `2026-08-${String(10 + i).padStart(2, "0")}`,
     time: `${String(9 + (i % 9)).padStart(2, "0")}:${String((i * 7) % 60).padStart(2, "0")}`,

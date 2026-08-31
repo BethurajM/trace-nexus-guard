@@ -71,7 +71,7 @@ function Dashboard() {
 
       <div className="mb-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {dashboardStats.map((s, i) => {
-          const Icon = icons[i];
+          const Icon = icons[i] ?? FolderKanban;
           const tone = s.tone as Tone;
           return (
             <div key={s.label} className="glass rounded-xl p-5 transition-colors hover:border-primary/30">
