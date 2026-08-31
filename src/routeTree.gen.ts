@@ -18,6 +18,7 @@ import { Route as AppContradictionsRouteImport } from './routes/_app.contradicti
 import { Route as AppCorrelationRouteImport } from './routes/_app.correlation'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppExternalRecordsRouteImport } from './routes/_app.external-records'
+import { Route as AppVerificationRouteImport } from './routes/_app.verification'
 import { Route as AppCasesIndexRouteImport } from './routes/_app.cases.index'
 import { Route as AppCasesCaseIdRouteImport } from './routes/_app.cases.$caseId'
 import { Route as AppEvidenceIndexRouteImport } from './routes/_app.evidence.index'
@@ -68,6 +69,11 @@ const AppExternalRecordsRoute = AppExternalRecordsRouteImport.update({
   path: '/external-records',
   getParentRoute: () => AppRoute,
 } as any)
+const AppVerificationRoute = AppVerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCasesIndexRoute = AppCasesIndexRouteImport.update({
   id: '/cases/',
   path: '/cases/',
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/correlation': typeof AppCorrelationRoute
   '/dashboard': typeof AppDashboardRoute
   '/external-records': typeof AppExternalRecordsRoute
+  '/verification': typeof AppVerificationRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
   '/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
   '/evidence/upload': typeof AppEvidenceUploadRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/correlation': typeof AppCorrelationRoute
   '/dashboard': typeof AppDashboardRoute
   '/external-records': typeof AppExternalRecordsRoute
+  '/verification': typeof AppVerificationRoute
   '/cases/$caseId': typeof AppCasesCaseIdRoute
   '/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
   '/evidence/upload': typeof AppEvidenceUploadRoute
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/_app/correlation': typeof AppCorrelationRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/external-records': typeof AppExternalRecordsRoute
+  '/_app/verification': typeof AppVerificationRoute
   '/_app/cases/$caseId': typeof AppCasesCaseIdRoute
   '/_app/evidence/$evidenceId': typeof AppEvidenceEvidenceIdRoute
   '/_app/evidence/upload': typeof AppEvidenceUploadRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/correlation'
     | '/dashboard'
     | '/external-records'
+    | '/verification'
     | '/cases/$caseId'
     | '/evidence/$evidenceId'
     | '/evidence/upload'
@@ -167,6 +177,7 @@ export interface FileRouteTypes {
     | '/correlation'
     | '/dashboard'
     | '/external-records'
+    | '/verification'
     | '/cases/$caseId'
     | '/evidence/$evidenceId'
     | '/evidence/upload'
@@ -183,6 +194,7 @@ export interface FileRouteTypes {
     | '/_app/correlation'
     | '/_app/dashboard'
     | '/_app/external-records'
+    | '/_app/verification'
     | '/_app/cases/$caseId'
     | '/_app/evidence/$evidenceId'
     | '/_app/evidence/upload'
@@ -260,6 +272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppExternalRecordsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/verification': {
+      id: '/_app/verification'
+      path: '/verification'
+      fullPath: '/verification'
+      preLoaderRoute: typeof AppVerificationRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/cases/': {
       id: '/_app/cases/'
       path: '/cases'
@@ -306,6 +325,7 @@ interface AppRouteChildren {
   AppCorrelationRoute: typeof AppCorrelationRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppExternalRecordsRoute: typeof AppExternalRecordsRoute
+  AppVerificationRoute: typeof AppVerificationRoute
   AppCasesCaseIdRoute: typeof AppCasesCaseIdRoute
   AppEvidenceEvidenceIdRoute: typeof AppEvidenceEvidenceIdRoute
   AppEvidenceUploadRoute: typeof AppEvidenceUploadRoute
@@ -321,6 +341,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppCorrelationRoute: AppCorrelationRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppExternalRecordsRoute: AppExternalRecordsRoute,
+  AppVerificationRoute: AppVerificationRoute,
   AppCasesCaseIdRoute: AppCasesCaseIdRoute,
   AppEvidenceEvidenceIdRoute: AppEvidenceEvidenceIdRoute,
   AppEvidenceUploadRoute: AppEvidenceUploadRoute,
