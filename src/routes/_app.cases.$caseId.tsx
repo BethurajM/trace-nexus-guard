@@ -78,7 +78,7 @@ function CaseDetails() {
 
       <Tabs defaultValue="overview">
         <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1 bg-surface/60 p-1">
-          {["Overview", "Evidence", "AI Findings", "Contradictions", "External Matches", "Chain of Custody", "Blockchain"].map(
+          {["Overview", "Ask AI", "Evidence", "AI Findings", "Contradictions", "External Matches", "Chain of Custody", "Blockchain"].map(
             (t) => (
               <TabsTrigger key={t} value={t.toLowerCase().replace(/ /g, "-")} className="text-xs">
                 {t}
