@@ -54,7 +54,7 @@ export function CaseAssistant({ record }: { record: CaseRecord }) {
         mismatch.length
           ? `Items needing attention: ${mismatch.map((e) => `${e.id} (${e.hashStatus})`).join(", ")}.`
           : "All SHA-256 hashes match their blockchain-anchored originals."
-      }${items[0] ? ` Example anchor: ${shortHash(items[0].hash, 24)}.` : ""}`;
+      }${items[0] ? ` Example anchor: ${shortHash(items[0].originalHash, 24)}.` : ""}`;
     }
 
     if (/evidence|file|item|upload/.test(s)) {
