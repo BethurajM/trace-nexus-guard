@@ -125,6 +125,15 @@ function CaseDetails() {
           </Panel>
         </TabsContent>
 
+        <TabsContent value="ask-ai" className="mt-5">
+          <Panel
+            title="Case Assistant"
+            description="Ask questions about this case. Answers are assistive and require investigator verification."
+          >
+            <CaseAssistant record={record} />
+          </Panel>
+        </TabsContent>
+
         <TabsContent value="evidence" className="mt-5">
           <Panel title={`Evidence (${items.length})`} bodyClassName="p-0">
             <div className="overflow-x-auto">
