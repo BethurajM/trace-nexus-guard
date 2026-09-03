@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/patchx/PageHeader";
 import { Panel } from "@/components/patchx/Panel";
 import { StatusBadge, toneForStatus } from "@/components/patchx/StatusBadge";
 import { HashBlock } from "@/components/patchx/HashBlock";
+import { CaseAssistant } from "@/components/patchx/CaseAssistant";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
