@@ -16,7 +16,10 @@ import {
   Workflow,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 import { investigator } from "@/lib/mock-data";
+import { supabase } from "@/integrations/supabase/client";
+import { useProfile } from "@/hooks/useProfile";
 
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -35,6 +38,25 @@ const nav = [
 
 export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { user, profile } = useProfile();
+
+  const displayName = profile?.full_name ?? user?.email ?? investigator.name;
+  const displayEmail = profile?.email ?? user?.email ?? investigator.role;
+  const initials = displayName
+    .split(/[\s@.]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+
+  const handleSignOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    toast.success("Session ended securely");
+    navigate({ to: "/", replace: true });
+  };
 
   return (
     <div className="flex h-full flex-col border-r border-sidebar-border bg-sidebar">
@@ -72,10 +94,7 @@ export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
 
         <button
           type="button"
-          onClick={() => {
-            toast.success("Session ended securely");
-            navigate({ to: "/" });
-          }}
+          onClick={handleSignOut}
           className="mt-1 flex w-full items-center gap-3 rounded-lg border border-transparent px-3 py-2 text-[13px] text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
         >
           <LogOut className="size-4 shrink-0" />
@@ -86,13 +105,13 @@ export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
       <div className="border-t border-sidebar-border p-4">
         <div className="flex items-center gap-3">
           <div className="flex size-9 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-xs font-semibold text-primary">
-            IA
+            {initials || "IA"}
           </div>
           <div className="min-w-0 leading-tight">
             <div className="truncate text-[13px] font-medium text-sidebar-foreground">
-              {investigator.name}
+              {displayName}
             </div>
-            <div className="truncate text-[11px] text-muted-foreground">{investigator.role}</div>
+            <div className="truncate text-[11px] text-muted-foreground">{displayEmail}</div>
             <div className="mt-1 flex items-center gap-1.5 text-[11px] text-primary">
               <span className="size-1.5 animate-pulse rounded-full bg-primary" />
               {investigator.status}
